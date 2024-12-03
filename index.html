@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>treinamento 2 API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js "></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="conteudo"></div>
+    <script>
+        $(document).ready(function () {
+            $("#conteudo").html("");
+            $.ajax({
+                url: "https://fabiooliveira.cloud/aula_api_04/",
+                method: "GET",
+                data: { api_key: "1a0c5675cab628c1ab82b7ee37e71cd9" },
+                dataType: "json",
+                success: function (resposta) {
+                    resposta.forEach(item => {
+                        var cthtml = "";
+                        cthtml += "<div id='cartoes'>";
+                        cthtml += `
+                        <div class="noticia">
+                            <h1>${item.titulo}</h1>
+                            <img src='${item.url_imagem}' width='400'><br>
+                            <b>Publicado em:</b>${item.data_publicacao}
+                            <b>Por:</b>${item.autor} <b>Categoria:</b>${item.categoria}<br>
+                            <p>${item.texto_noticia}</p>
+                        </div>
+                            `;
+
+                        $("#conteudo").append(cthtml);
+                    });
+                },
+
+                error: function () {
+                    alert("Erro na API");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
